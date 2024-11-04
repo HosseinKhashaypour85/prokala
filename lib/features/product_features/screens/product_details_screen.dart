@@ -40,6 +40,7 @@ class _ProductDetailsScreen extends State<ProductDetailsScreen> {
     final bool status;
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    print(arguments['product_id']);
     return SafeArea(
       child: Scaffold(
         body: BlocProvider(
