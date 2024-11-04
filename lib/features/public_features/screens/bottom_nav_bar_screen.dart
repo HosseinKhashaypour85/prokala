@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prokalaproject/const/theme/colors.dart';
-import 'package:prokalaproject/features/authentication_features/screens/auth_screen.dart';
-import 'package:prokalaproject/features/cart_features/screen/cart_screen.dart';
+import 'package:prokalaproject/const/theme/theme.dart';
+import 'package:prokalaproject/features/cart_features/screen/check_cart.dart';
 import 'package:prokalaproject/features/home_features/screens/home_screen.dart';
+import 'package:prokalaproject/features/profile_features/screen/check_profile.dart';
+import 'package:prokalaproject/features/public_features/changetheme/logic/change_theme_cubit.dart';
 import 'package:prokalaproject/features/public_features/logic/bottom_nav_cubit.dart';
 import 'package:prokalaproject/features/public_features/logic/token_checker/token_check_cubit.dart';
 
@@ -23,8 +25,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   List<Widget> screenList = [
     const HomeScreen(),
     const CategoryScreen(),
-    const CartScreen(),
-    Container(),
+    const CheckCartScreen(),
+    const CheckProfileScreen(),
   ];
 
   @override
@@ -44,7 +46,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
             selectedItemColor: primaryColor,
             showSelectedLabels: true,
             showUnselectedLabels: true,
-            unselectedItemColor: theme.iconTheme.color,
+            unselectedItemColor:
+                BlocProvider.of<ChangethemeCubit>(context).customTheme ==
+                        CustomTheme.darkTheme
+                    ? Colors.black
+                    : theme.iconTheme.color,
             selectedLabelStyle: const TextStyle(
               color: primaryColor,
               fontWeight: FontWeight.bold,
@@ -86,9 +92,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               BlocProvider.of<BottomNavCubit>(context).onTap(value);
             },
           ),
-          body: screenList.elementAt(BlocProvider
-              .of<BottomNavCubit>(context)
-              .screenIndex),
+          body: screenList
+              .elementAt(BlocProvider.of<BottomNavCubit>(context).screenIndex),
         );
       },
     );

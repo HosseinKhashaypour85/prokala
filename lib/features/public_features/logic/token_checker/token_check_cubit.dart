@@ -16,6 +16,5 @@ class TokenCheckCubit extends Cubit<TokenCheckState> {
      emit(TokenIsNotLoged());
      print('false');
    }
-
   }
 }

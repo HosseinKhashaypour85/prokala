@@ -11,7 +11,7 @@ class SecureStorageClass{
     await const FlutterSecureStorage().write(key: 'token', value: token);
   }
 
-  Future<void> DeleteUserToken()async{
+  Future<dynamic> DeleteUserToken()async{
     const FlutterSecureStorage().delete(key: 'token');
   }
 }
